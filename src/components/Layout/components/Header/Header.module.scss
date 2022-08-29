@@ -19,8 +19,12 @@
     justify-content: space-between;
 }
 
-.search {
+.search,
+.search-result {
     width: 361px;
+}
+
+.search {
     height: var(--search-height);
     background-color: rgba(22, 24, 35, 0.1);
     border-radius: var(--border-raidus-search);
@@ -86,4 +90,13 @@
     &:active {
         background: rgba(22, 24, 35, 0.06);
     }
+}
+
+.search-title {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
 }

@@ -11,7 +11,7 @@ function AcountItem({ children }) {
         <div className={cx('wrapper')}>
             <img
                 className={cx('avatar')}
-                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/f89b316574f8f0ab300e20d4b7ff6a29~c5_100x100.jpeg?x-expires=1661958000&x-signature=GRu0LQbFzVBTGpkylsvbVKVFUBM%3D"
+                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/51cd1a75bc63df673835580a01727b52~c5_100x100.jpeg?x-expires=1662645600&x-signature=weRP4clHP9Gw71TG%2Bqsq%2Fldq740%3D"
                 alt=""
             />
             <div className={cx('info')}>

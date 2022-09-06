@@ -5,11 +5,12 @@
     z-index: 99;
 
     .menu-item {
-        display: inline-block;
+        display: inline-flex;
         margin-left: 0;
-        font-weight: 500;
+        font-weight: 600;
         width: 100%;
-        text-align: left;
+        justify-content: flex-start;
+        align-items: center;
         line-height: 2rem;
         border-radius: 0;
         cursor: pointer;

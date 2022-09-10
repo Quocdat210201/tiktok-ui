@@ -1,0 +1,96 @@
+// Search CSS
+
+.search,
+.search-result {
+    width: 361px;
+}
+
+.search {
+    height: var(--search-height);
+    background-color: rgba(22, 24, 35, 0.1);
+    border-radius: var(--border-raidus-search);
+    padding-left: 16px;
+    display: flex;
+    position: relative;
+    border: 1.5px solid transparent;
+
+    input {
+        flex: 1;
+        height: 100%;
+        padding-right: 40px;
+        color: var(--black);
+        font-size: 1.6rem;
+        caret-color: var(--primary);
+        background-color: transparent;
+    }
+
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-height-spacer) * 2);
+        top: var(--search-height-spacer);
+        right: var(--search-btn);
+        background: rgba(22, 24, 35, 0.12);
+    }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+
+.clear,
+.loading {
+    position: absolute;
+    right: calc(var(--search-btn));
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: rgba(22, 24, 35, 0.34);
+    width: 16px;
+    height: 16px;
+    margin: 0 12px;
+}
+
+.loading {
+    animation: spinner linear infinite 1s;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+.search-btn {
+    width: var(--search-btn);
+    height: 100%;
+    border-top-right-radius: var(--border-raidus-search);
+    border-bottom-right-radius: var(--border-raidus-search);
+    font-size: 1.8rem;
+    color: rgba(22, 24, 35, 0.34);
+    background: transparent;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+        cursor: pointer;
+    }
+
+    &:active {
+        background: rgba(22, 24, 35, 0.06);
+    }
+}
+
+.search-title {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
+}

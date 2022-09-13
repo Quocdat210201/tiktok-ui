@@ -1,59 +1,59 @@
 import styles from './Search.module.scss';
 import className from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useState, useRef } from 'react';
 import 'tippy.js/dist/tippy.css';
+import axios from 'axios';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { useDebounce } from '~/hooks';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AcountItem from '~/components/AcountItem';
 import { ClearIcon, LoadingIcon, SearchIcon } from '~/components/Icons';
+import * as searchService from '~/apiSercives/searchServices';
 
 const cx = className.bind(styles);
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [showResults, setShowResults] = useState(true);
+    const [searchResult, setSearchResult] = useState([]);
+    const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
-
-    const inputref = useRef();
-
+    const debounced = useDebounce(searchValue, 500);
+    const inputRef = useRef();
     useEffect(() => {
-        if (!searchValue.trim()) {
-            setSearchResults([]);
+        if (!debounced.trim()) {
+            setSearchResult([]);
             return;
         }
-        setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResults(res.data);
-                setLoading(false);
-            })
-            .catch(() => setLoading(false));
-    }, [searchValue]);
+        const fetchApi = async () => {
+            setLoading(true);
+            const results = await searchService.search(debounced);
+            setSearchResult(results);
+            setLoading(false);
+        };
+
+        fetchApi();
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchValue('');
-        setSearchResults([]);
-        inputref.current.focus();
+        setSearchResult([]);
+        inputRef.current.focus();
     };
-
     const handleHideResult = () => {
-        setShowResults(false);
+        setShowResult(false);
     };
     return (
         <HeadlessTippy
             interactive
-            visible={showResults && searchResults.length > 0}
+            visible={showResult && searchResult.length > 0}
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
-                        <h4 className={cx('search-title')}> Acounts</h4>
-                        {searchResults.map((result) => (
+                        <h4 className={cx('search-title')}>Accounts</h4>
+                        {searchResult.map((result) => (
                             <AcountItem key={result.id} data={result} />
                         ))}
                     </PopperWrapper>
@@ -63,12 +63,12 @@ function Search() {
         >
             <div className={cx('search')}>
                 <input
-                    ref={inputref}
+                    ref={inputRef}
                     value={searchValue}
-                    placeholder="Search acounts and videos"
+                    placeholder="Search accounts and videos"
                     spellCheck={false}
                     onChange={(e) => setSearchValue(e.target.value)}
-                    onFocus={() => setShowResults(true)}
+                    onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && !loading && (
                     <button className={cx('clear')} onClick={handleClear}>
@@ -83,5 +83,4 @@ function Search() {
         </HeadlessTippy>
     );
 }
-
 export default Search;

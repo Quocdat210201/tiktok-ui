@@ -42,9 +42,14 @@
     padding-bottom: 8px;
 }
 
+.menu-body {
+    overflow-y: auto;
+}
+
 // Header
 .header {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     height: 50px;
     position: relative;

@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
+import routesConfig from '~/config/routes';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import Image from '~/components/Image';
@@ -90,7 +92,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
-                    <img src={images.logo} alt="tiktok" />
+                    <Link to={routesConfig.home}>
+                        <img src={images.logo} alt="tiktok" />
+                    </Link>
                 </div>
 
                 <Search />
@@ -128,7 +132,7 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/afb7fa977573869646ef23e6bdb7ec84~c5_100x100.jpeg?x-expires=1662987600&x-signature=r6MoCQpem%2B6IltD4UztWzf8rZmk%3D"
+                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/269f6f9d041b89bda17af9595a993f7e~c5_100x100.jpeg?x-expires=1663257600&x-signature=pCijlg06XhFCQu3%2Fc5W79Ci%2BT%2FQ%3D"
                                 alt="quoc dat"
                             ></Image>
                         ) : (

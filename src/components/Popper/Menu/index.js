@@ -10,7 +10,7 @@ import { useState } from 'react';
 const cx = className.bind(styles);
 const defaultfn = () => {};
 
-function Menu({ children, items = [], onChange = defaultfn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultfn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -41,6 +41,7 @@ function Menu({ children, items = [], onChange = defaultfn }) {
             // visible
             offset={[16, 8]}
             placement="bottom-end"
+            hideOnClick={hideOnClick}
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
@@ -52,7 +53,7 @@ function Menu({ children, items = [], onChange = defaultfn }) {
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={cx('menu-body')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}
